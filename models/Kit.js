@@ -10,7 +10,7 @@ const KitSchema = new Schema({
   },
   hueType: {
     type: String,
-    enum: ["Fitz1", "Fitz2", "Fitz3", "Fitz4", "Fitz5", "Fitz6"]
+    enum: ["Fitz1", "Fitz2", "Fitz3", "Fitz4", "Fitz5", "Fitz6"],
   },
   uniqueVisits: {
     type: Number,
@@ -19,9 +19,14 @@ const KitSchema = new Schema({
   creatorId: {
     type: String,
   },
-  imageUrl: {
-    type: String,
-  },
+  // imageUrl: {
+  //   type: String,
+  // },
+  imageUrl: [Object],
+  // videoUrl: {
+  //   type: String,
+  // },
+  videoUrl: [Object],
   kitItems: [
     {
       affiliateLink: {
@@ -29,6 +34,10 @@ const KitSchema = new Schema({
       },
       makeupCategory: {
         type: String,
+      },
+      linkClicks: {
+        type: Number,
+        default: 0,
       },
     },
   ],

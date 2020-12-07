@@ -30,15 +30,16 @@ const ConsumerViewOne = () => {
         .catch((err) => {
           console.log(err);
         });
-
+      // console.log(res.data);
       API.getPopulatedUsers(res.data.creatorId).then((res) => {
         // console.log("This is the res", res.data);
+
         setKitCreatorInfo({
           image: res.data[0].image,
           username: res.data[0].userName,
           id: res.data[0]._id,
           name: res.data[0].name,
-          role: res.data[0].role
+          role: res.data[0].role,
         });
       });
     });
@@ -64,9 +65,6 @@ const ConsumerViewOne = () => {
 
   const onClickDelete = () => {
     API.deleteKit(id).then((res) => {
-      
-      
-
       history.push(`/portal/${userId.id}`);
     });
   };
@@ -76,6 +74,7 @@ const ConsumerViewOne = () => {
       {update ? (
         <UpdateKit
           src={kit.imageUrl}
+          key={kit._id}
           info={kit}
           onClickUpdate={onClickUpdate}
           handleInputChange={handleInputChange}
@@ -85,6 +84,7 @@ const ConsumerViewOne = () => {
         <div>
           <Kit
             src={kit.imageUrl}
+            key={kit._id}
             info={kit}
             onClickDelete={onClickDelete}
             onClickUpdate={onClickUpdate}

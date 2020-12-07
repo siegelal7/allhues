@@ -32,7 +32,6 @@ const ConsumerViewAll = (props) => {
     if (fromPopularBtn) {
       API.getKits().then((res) => {
         setKits(res.data);
-
         setFilterKits(res.data.sort((a, b) => b.uniqueVisits - a.uniqueVisits));
       });
     } else if (fromNewBtn) {
@@ -71,30 +70,26 @@ const ConsumerViewAll = (props) => {
     findAll();
   }, [fromNewBtn]);
 
-  // useEffect(() => {
-  //   if (favorites) {
-  //     API.getUser().then((res) => {
-  //       setFavorites(res.data.favorites);
-  //     });
-  //   }
-  // }, []);
-
   useEffect(() => {
     if (favorites) {
-      API.getUser().then((res) => {
-        // console.log(res.data);
-        if (res.data) {
-          setFavorites(res.data.favorites);
-        }
-      });
+      API.getUser()
+        .then((res) => {
+          // console.log(res.data);
+          if (res.data) {
+            setFavorites(res.data.favorites);
+          }
+        })
+        .catch((err) => console.log(err));
     }
   }, []);
 
   useDidMountEffect(() => {
     if (id) {
-      API.putFavorite(id, favorites).then((res) => {
-        // console.log("put");
-      });
+      API.putFavorite(id, favorites)
+        .then((res) => {
+          // console.log("put");
+        })
+        .catch((err) => console.log(err));
     } else {
       history.push("/login");
     }

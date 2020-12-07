@@ -8,13 +8,17 @@ import RoleContext from "./utils/roleContext";
 import Home from "./pages/Home";
 import ContentCreatorUpload from "./pages/ContentCreatorUpload";
 import ContentCreatorPortal from "./pages/ContentCreatorPortal";
+import FollowingPage from "./pages/FollowingPage";
 import ConsumerViewAll from "./pages/ConsumerViewAll";
 import ConsumerViewOne from "./pages/ConsumerViewOne";
+import ViewAllVideos from "./pages/ViewAllVideos";
+import SendMessage from "./pages/SendMessage";
 import Navbar from "./components/Navbar/Navbar";
 import FavoritesPage from "./pages/FavoritesPage";
 import Signup from "./components/Authentication/Signup";
 import Login from "./components/Authentication/Login";
 import JsonWebToken from "jsonwebtoken";
+import YourMessages from "./pages/YourMessages";
 
 function App() {
   const [jwt, setJwt] = useState("");
@@ -68,10 +72,22 @@ function App() {
                 ></Route>
                 <Route
                   exact
+                  path="/following"
+                  component={FollowingPage}
+                ></Route>
+                <Route exact path="/newmessage" component={SendMessage}></Route>
+                <Route
+                  exact
+                  path="/messages"
+                  // key={Math.floor(Math.random() * 10000 + 1)}
+                  component={YourMessages}
+                ></Route>
+                <Route
+                  exact
                   path="/viewall"
                   component={ConsumerViewAll}
                 ></Route>
-
+                <Route exact path="/videos" component={ViewAllVideos}></Route>
                 {/* <Route exact path="/viewone" component={ConsumerViewOne}></Route> */}
                 <Route path="/viewone/:id" component={ConsumerViewOne}></Route>
                 {/* <Route path="/viewone/:id" component={Favo/}></Route> */}

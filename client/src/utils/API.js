@@ -4,6 +4,9 @@ export default {
   getKit: function (id) {
     return axios.get(`/api/kits/${id}`);
   },
+  getAllUsers: function () {
+    return axios.get("/api/videouploads");
+  },
   getKits: function () {
     return axios.get("/api/kits");
   },
@@ -29,5 +32,8 @@ export default {
   },
   getPopulatedUsers: function (id) {
     return axios.get(`/api/users/${id}`);
+  },
+  updateAffiliateLinkNumbers: function (id) {
+    return axios.put(`/api/kits/affiliatelink/${id}`);
   },
 };

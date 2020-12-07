@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState, useContext } from "react";
 
 import UserContext from "../utils/UserContext";
-import RoleContext from "../utils/roleContext";
+// import RoleContext from "../utils/roleContext";
 import MultiKit from "../components/MultiKit/MultiKit";
 import ProfileCard from "../components/ProfileCard/ProfileCard";
 
@@ -17,6 +17,7 @@ const ContentCreatorPortal = () => {
   const [favorites, setFavorites] = useState([]);
 
   const [userProfileInfo, setUserProfileInfo] = useState([]);
+  // const [clickedInfo, setClickedInfo] = useState("");
 
   const { id } = useContext(UserContext);
   const history = useHistory;
@@ -24,27 +25,32 @@ const ContentCreatorPortal = () => {
   const userId = useParams();
 
   const getKits = () => {
-    axios.get(`/api/users/${id}`).then((res) => {
-      setYourKits(res.data[0].kits);
-    });
-
-    axios.get(`/api/users/${userId.id}`).then((res) => {
-      setYourKits(res.data[0].kits);
-      setUserProfileInfo(res.data[0]);
-    });
+    API.getAllUsers()
+      .then((res) => {
+        let iterVal = res.data;
+        // console.log(userId);
+        if (userId.id == id) {
+          for (let i = 0; i < iterVal.length; i++) {
+            if (iterVal[i]._id === userId.id) {
+              setYourKits(iterVal[i].kits);
+              setUserProfileInfo(iterVal[i]);
+            }
+          }
+        } else {
+          for (let j = 0; j < iterVal.length; j++) {
+            if (iterVal[j]._id === userId.id) {
+              setYourKits(iterVal[j].kits);
+              setUserProfileInfo(iterVal[j]);
+            }
+          }
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   useEffect(() => {
     getKits();
   }, [id]);
-
-  // useEffect(() => {
-  //   if (favorites) {
-  //     API.getUser().then((res) => {
-  //       setFavorites(res.data.favorites);
-  //     });
-  //   }
-  // }, []);
 
   useEffect(() => {
     if (favorites) {
@@ -68,7 +74,7 @@ const ContentCreatorPortal = () => {
   }, [favorites]);
 
   // console.log(yourKits);
-  const { role } = useContext(RoleContext);
+  // const { role } = useContext(RoleContext);
 
   if (yourKits) {
     return (
