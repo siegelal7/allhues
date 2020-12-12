@@ -10,11 +10,12 @@ import fitz4 from "../../assets/images/fitz4.png";
 import fitz5 from "../../assets/images/fitz5.png";
 import fitz6 from "../../assets/images/fitz6.png";
 
+
 const Kit = (props) => {
   const { id } = useContext(UserContext);
 
   const handleImgClick = () => {
-    window.open(props.src, '_blank')
+    window.open(props.src, "_blank");
   };
 
   const history = useHistory();
@@ -26,7 +27,7 @@ const Kit = (props) => {
   const handleAffiliateClick = (e) => {
     const idVal = e.target.getAttribute("id");
     API.updateAffiliateLinkNumbers(idVal)
-      .then((res) => console.log(res.data))
+      .then((res) => {})
       .catch((err) => console.log(err));
   };
 
@@ -85,7 +86,7 @@ const Kit = (props) => {
   if (id === props.info.creatorId) {
     return (
       <>
-        <div className="container mt-3 d-flex justify-content-center">
+        <div className="container mt-3 justify-content-center">
           <div className="row">
             <div className="col-sm-3">
               <img
@@ -111,6 +112,7 @@ const Kit = (props) => {
           </div>
         </div>
         <div className="card card-viewone">
+
           {typeof props.src[0] === "object" ? (
             <img
               src={props.src[0].url}
